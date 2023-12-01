@@ -1,0 +1,12 @@
+{
+  "buildOptions": {},
+  "compilerOptions": {
+    "outDir": "build",
+    "module": "ESNext",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "strict": true
+  }
+}
