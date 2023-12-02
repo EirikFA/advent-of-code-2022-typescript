@@ -12,8 +12,8 @@ type ConcreteSolverConstructor<I, O> = new (
 export default abstract class Solver<I, O> {
   private readonly DAY: number;
 
-  protected abstract readonly PART_1_TEST_OUTPUT: O;
-  protected abstract readonly PART_2_TEST_OUTPUT: O;
+  protected abstract readonly PART_1_TEST_OUTPUT?: O;
+  protected abstract readonly PART_2_TEST_OUTPUT?: O;
 
   constructor(day: number) {
     this.DAY = day;
@@ -47,15 +47,23 @@ export default abstract class Solver<I, O> {
   }
 
   private async test() {
-    const part1Input = await this.parseInput(this.readInput("part1"));
-    const part1 = await this.part1(part1Input);
-    assert.strictEqual(part1, this.PART_1_TEST_OUTPUT);
+    if (this.PART_1_TEST_OUTPUT) {
+      const part1Input = await this.parseInput(this.readInput("part1"));
+      const part1 = await this.part1(part1Input);
+      assert.strictEqual(part1, this.PART_1_TEST_OUTPUT);
+    } else {
+      console.warn("Part 1 test not implemented for day", this.DAY);
+    }
 
-    const part2Input = await this.parseInput(this.readInput("part2"));
-    const part2 = await this.part2(part2Input);
-    assert.strictEqual(part2, this.PART_2_TEST_OUTPUT);
+    if (this.PART_2_TEST_OUTPUT) {
+      const part2Input = await this.parseInput(this.readInput("part2"));
+      const part2 = await this.part2(part2Input);
+      assert.strictEqual(part2, this.PART_2_TEST_OUTPUT);
+    } else {
+      console.warn("Part 2 test not implemented for day", this.DAY);
+    }
 
-    console.log(`Tests for day ${this.DAY} passed`);
+    console.log("Tests for day", this.DAY, "passed");
   }
 
   private readInput(

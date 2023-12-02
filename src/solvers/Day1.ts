@@ -25,7 +25,7 @@ export default class Day1 extends Solver<Input, number> {
   protected PART_1_TEST_OUTPUT = 142;
   protected PART_2_TEST_OUTPUT = 281;
 
-  async parseInput(lines: readline.Interface): Promise<Input> {
+  protected async parseInput(lines: readline.Interface): Promise<Input> {
     const parsedLines: Input = [];
 
     for await (const line of lines) {
@@ -45,11 +45,11 @@ export default class Day1 extends Solver<Input, number> {
     return parsedLines;
   }
 
-  part1(input: Input): number {
+  protected part1(input: Input): number {
     return this.calibrationSum(input, false);
   }
 
-  part2(input: Input): number {
+  protected part2(input: Input): number {
     return this.calibrationSum(input, true);
   }
 
