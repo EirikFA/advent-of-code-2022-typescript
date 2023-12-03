@@ -1,5 +1,4 @@
 import readline from "readline/promises";
-import { MaybePromise } from "../types.js";
 import Solver from "./Solver.js";
 
 interface CubeSet {
@@ -41,7 +40,7 @@ export default class Day2 extends Solver<Input, number> {
     return games;
   }
 
-  protected part1(games: Input): MaybePromise<number> {
+  protected part1(games: Input): number {
     const BAG: CubeSet = { red: 12, green: 13, blue: 14 };
     const sumValidIds = games.reduce((sum, game) => {
       const validSets = game.sets.filter(set => this.isValidSet(set, BAG));
@@ -51,7 +50,7 @@ export default class Day2 extends Solver<Input, number> {
     return sumValidIds;
   }
 
-  protected part2(games: Input): MaybePromise<number> {
+  protected part2(games: Input): number {
     const minSets = games.map(game => this.minimumSet(game));
     return minSets.reduce((sum, set) => {
       return sum + set.red * set.green * set.blue;

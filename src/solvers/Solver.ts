@@ -80,7 +80,7 @@ export default abstract class Solver<I, O> {
     });
   }
 
-  protected abstract parseInput(lines: readline.Interface): Promise<I>;
+  protected abstract parseInput(lines: readline.Interface): MaybePromise<I>;
   protected abstract part1(input: I): MaybePromise<O>;
   protected abstract part2(input: I): MaybePromise<O>;
 }
