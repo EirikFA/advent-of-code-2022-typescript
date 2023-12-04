@@ -35,15 +35,26 @@ export default abstract class Solver<I, O> {
   }
 
   async run() {
-    const before = new Date();
-
     await this.test();
-    const input = await this.parseInput(this.readInput());
+
+    const lines = this.readInput();
+
+    const beforeParse = new Date();
+    const input = await this.parseInput(lines);
+    const afterParse = new Date();
+
+    const before = new Date();
     console.log("Part 1:", await this.part1(input));
     console.log("Part 2:", await this.part2(input));
-
     const after = new Date();
-    console.log("Duration:", after.getTime() - before.getTime(), "ms");
+
+    console.log(
+      "Parsing (after reading) time:",
+      afterParse.getTime() - beforeParse.getTime(),
+      "ms",
+    );
+    console.log("Part 1 & 2 time:", after.getTime() - before.getTime(), "ms");
+    console.log("Total time:", after.getTime() - beforeParse.getTime(), "ms");
   }
 
   private async test() {
