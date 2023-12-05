@@ -57,6 +57,18 @@ export default abstract class Solver<I, O> {
     console.log("Total time:", after.getTime() - beforeParse.getTime(), "ms");
   }
 
+  protected linesToString(lines: readline.Interface): Promise<string> {
+    return new Promise(resolve => {
+      let input = "";
+      lines.on("line", line => {
+        input += line + "\n";
+      });
+      lines.on("close", () => {
+        resolve(input);
+      });
+    });
+  }
+
   private async test() {
     if (this.PART_1_TEST_OUTPUT) {
       const part1Input = await this.parseInput(this.readInput("part1"));

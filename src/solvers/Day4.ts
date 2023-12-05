@@ -1,5 +1,4 @@
 import readline from "readline/promises";
-import { MaybePromise } from "../types.js";
 import Solver from "./Solver.js";
 
 class ScratchCard {
@@ -37,11 +36,11 @@ export default class Day4 extends Solver<Input, number> {
     return cards;
   }
 
-  protected part1(cards: Input): MaybePromise<number> {
+  protected part1(cards: Input): number {
     return cards.reduce((acc, card) => acc + card.points, 0);
   }
 
-  protected part2(cards: Input): MaybePromise<number> {
+  protected part2(cards: Input): number {
     // Copies won of each card (plus original)
     const copiesWon: number[] = cards.map(() => 1);
     cards.forEach((card, i) => {
