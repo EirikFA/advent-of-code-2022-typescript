@@ -6,7 +6,7 @@ interface Input {
   distances: number[];
 }
 
-export default class Day5 extends Solver<Input, number> {
+export default class Day6 extends Solver<Input, number> {
   protected PART_1_TEST_OUTPUT = 288;
   protected PART_2_TEST_OUTPUT = 71503;
 
