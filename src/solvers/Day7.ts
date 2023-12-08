@@ -92,11 +92,9 @@ export default class Day7 extends Solver<Input, number> {
   protected PART_1_TEST_OUTPUT = 6440;
   protected PART_2_TEST_OUTPUT = 5905;
 
-  protected async parseInput(
-    lineInterface: readline.Interface,
-  ): Promise<Input> {
+  protected async parseInput(lines: readline.Interface): Promise<Input> {
     const hands: Hand[] = [];
-    for await (const line of lineInterface) {
+    for await (const line of lines) {
       const [cards, bid] = line.split(" ");
       hands.push(new Hand(cards.split(""), Number(bid)));
     }
