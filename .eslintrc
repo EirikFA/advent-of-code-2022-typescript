@@ -18,6 +18,12 @@
   },
   "rules": {
     "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/member-ordering": "error"
+    "@typescript-eslint/member-ordering": "error",
+    "@typescript-eslint/no-confusing-void-expression": [
+      "error",
+      {
+        "ignoreArrowShorthand": true
+      }
+    ]
   }
 }

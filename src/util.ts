@@ -9,3 +9,7 @@ export function lcm(...numbers: number[]): number {
 export function transpose(matrix: string[][]): string[][] {
   return matrix[0].map((_, col) => matrix.map(row => row[col]));
 }
+
+export function arrayEquals<T>(a: T[], b: T[]): boolean {
+  return a.length === b.length && a.every((v, i) => v === b[i]);
+}
