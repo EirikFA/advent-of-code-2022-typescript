@@ -1,4 +1,5 @@
 import readline from "readline/promises";
+import { interiorPoints, shoelaceArea } from "../util.js";
 import Solver from "./Solver.js";
 
 type Position = [number, number];
@@ -81,7 +82,8 @@ export default class Day10 extends Solver<Input, number> {
       path.push(step1[0]);
     }
 
-    return this.interiorPoints(path);
+    // Credits to https://www.reddit.com/r/adventofcode/comments/18evyu9/comment/kcqmhwk/?context=3 for putting me on this path (pun not intended) for part 2
+    return interiorPoints(path);
   }
 
   private findBeginnings(grid: Grid, start: Position): [Step, Step] {
@@ -146,23 +148,5 @@ export default class Day10 extends Solver<Input, number> {
     throw new Error(
       `Unexpected character ${char} at (${pos[0]}, ${pos[1]}) from ${from}`,
     );
-  }
-
-  // Credits to https://www.reddit.com/r/adventofcode/comments/18evyu9/comment/kcqmhwk/?context=3 for putting me on this path (pun not intended) for part 2
-  // Pick's theorem (https://en.wikipedia.org/wiki/Pick%27s_theorem)
-  private interiorPoints(points: Position[]): number {
-    const area = this.shoelaceArea(points);
-    // Assume points is a "loop" (start = end), required for correct shoelace area
-    const boundary = points.length - 1;
-    return area - boundary / 2 + 1;
-  }
-
-  // Shoelace formula (https://en.wikipedia.org/wiki/Shoelace_formula)
-  private shoelaceArea(points: Position[]): number {
-    let area = 0;
-    for (let i = 0; i < points.length - 1; i++) {
-      area += points[i][0] * points[i + 1][1] - points[i + 1][0] * points[i][1];
-    }
-    return Math.abs(area / 2);
   }
 }
