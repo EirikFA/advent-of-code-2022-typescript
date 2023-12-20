@@ -39,22 +39,19 @@ export default abstract class Solver<I, O> {
 
     const lines = this.readInput();
 
-    const beforeParse = new Date();
     const input = await this.parseInput(lines);
-    const afterParse = new Date();
+    const input2 = await this.parseInput(this.readInput());
 
     const before = new Date();
     console.log("Part 1:", await this.part1(input));
-    console.log("Part 2:", await this.part2(input));
-    const after = new Date();
+    const after1 = new Date();
 
-    console.log(
-      "Parsing (after reading) time:",
-      afterParse.getTime() - beforeParse.getTime(),
-      "ms",
-    );
-    console.log("Part 1 & 2 time:", after.getTime() - before.getTime(), "ms");
-    console.log("Total time:", after.getTime() - beforeParse.getTime(), "ms");
+    console.log("Part 2:", await this.part2(input2));
+    const after2 = new Date();
+
+    console.log("Part 1 time:", after1.getTime() - before.getTime(), "ms");
+    console.log("Part 2 time:", after2.getTime() - after1.getTime(), "ms");
+    console.log("Total time:", after2.getTime() - before.getTime(), "ms");
   }
 
   protected linesToStrings(lines: readline.Interface): Promise<string[]> {
