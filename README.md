@@ -5,3 +5,4 @@
 - Day 12 part 2 not solved. No clue how to do it, and reusing part 1 will never finish running
 - Day 14 part 2: Got some help from Copilot (see [inline comments](src/solvers/Day14.ts#L43)), but would like to return and figure out how to properly find a repeating sequence and the result after a billion cycles
 - Day 17 not done yet, but have an idea
+- Day 21 part 2 seems reasonable, but didn't feel like trying after looking at the solutions lol

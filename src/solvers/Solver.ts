@@ -43,10 +43,10 @@ export default abstract class Solver<I, O> {
     const input2 = await this.parseInput(this.readInput());
 
     const before = new Date();
-    console.log("Part 1:", await this.part1(input));
+    console.log("Part 1:", await this.part1(input, false));
     const after1 = new Date();
 
-    console.log("Part 2:", await this.part2(input2));
+    console.log("Part 2:", await this.part2(input2, false));
     const after2 = new Date();
 
     console.log("Part 1 time:", after1.getTime() - before.getTime(), "ms");
@@ -70,10 +70,25 @@ export default abstract class Solver<I, O> {
     return (await this.linesToStrings(lines)).join("\n");
   }
 
+  protected async linesToGrid(lines: readline.Interface): Promise<string[][]> {
+    const grid: string[][] = [];
+    let y = 0;
+    for await (const line of lines) {
+      for (let x = 0; x < line.length; x++) {
+        if (!grid[x]) {
+          grid[x] = [];
+        }
+        grid[x][y] = line[x];
+      }
+      y++;
+    }
+    return grid;
+  }
+
   private async test() {
     if (this.PART_1_TEST_OUTPUT) {
       const part1Input = await this.parseInput(this.readInput("part1"));
-      const part1 = await this.part1(part1Input);
+      const part1 = await this.part1(part1Input, true);
       assert.strictEqual(part1, this.PART_1_TEST_OUTPUT);
     } else {
       console.warn("Part 1 test not implemented for day", this.DAY);
@@ -81,7 +96,7 @@ export default abstract class Solver<I, O> {
 
     if (this.PART_2_TEST_OUTPUT) {
       const part2Input = await this.parseInput(this.readInput("part2"));
-      const part2 = await this.part2(part2Input);
+      const part2 = await this.part2(part2Input, true);
       assert.strictEqual(part2, this.PART_2_TEST_OUTPUT);
     } else {
       console.warn("Part 2 test not implemented for day", this.DAY);
@@ -105,6 +120,6 @@ export default abstract class Solver<I, O> {
   }
 
   protected abstract parseInput(lines: readline.Interface): MaybePromise<I>;
-  protected abstract part1(input: I): MaybePromise<O>;
-  protected abstract part2(input: I): MaybePromise<O>;
+  protected abstract part1(input: I, isTest: boolean): MaybePromise<O>;
+  protected abstract part2(input: I, isTest: boolean): MaybePromise<O>;
 }
