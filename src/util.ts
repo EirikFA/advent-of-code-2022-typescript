@@ -1,4 +1,4 @@
-import { Point } from "./types.js";
+import { NumberTuple, Point, Tuple } from "./types.js";
 
 export function gcd(a: number, b: number): number {
   return b === 0 ? a : gcd(b, a % b);
@@ -42,4 +42,26 @@ export function polygonPerimeter(points: Point[]): number {
     perimeter += Math.abs(x2 - x1) + Math.abs(y2 - y1);
   }
   return perimeter;
+}
+
+export function solveTwoLinearEqs(
+  eqs: Tuple<NumberTuple<3>, 2>,
+): Tuple<number, 2> | undefined {
+  const [a1, b1, c1] = eqs[0];
+  let [a2, b2, c2] = eqs[1];
+
+  const factor = -a2 / a1;
+  eqs[1] = eqs[1].map((n, i) => n + eqs[0][i] * factor) as NumberTuple<3>;
+  [a2, b2, c2] = eqs[1];
+
+  if (a2 === 0 && b2 === 0) {
+    return undefined;
+  }
+
+  // Now a2 = 0, thus b2 * b = c2
+  const b = c2 / b2;
+  // And a1 * a + b1 * b = c1
+  const a = (c1 - b1 * b) / a1;
+
+  return [a, b];
 }
